@@ -23,6 +23,7 @@
   "_moduleAliases": {
     "@config": "config",
     "@controllers": "controllers",
-    "@middleware": "middleware"
+    "@middleware": "middleware",
+    "@routes": "routes"
   }
 }

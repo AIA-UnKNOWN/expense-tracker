@@ -1,7 +1,7 @@
 const checkToken = require('@middleware/auth');
 const { register, login, getCurrentUser } = require('@controllers/AuthController');
 
-const registerRoutes = app => {
+const registerApiRoutes = app => {
 
   app.get('/', (req, res) => {
     res.send('Hello World');
@@ -14,4 +14,4 @@ const registerRoutes = app => {
 
 }
 
-module.exports = registerRoutes;
+module.exports = registerApiRoutes;
