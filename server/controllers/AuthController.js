@@ -17,8 +17,11 @@ class AuthController {
     return { ...user, password: hashedPassword };
   }
 
-  getCurrentUser() {
-
+  getCurrentUser(req, res) {
+    jwt.verify(req.token, process.env.SECRET_KEY, (error, data) => {
+      if (error) return res.status(401).json(error);
+      res.json(data.user);
+    });
   }
 
   register(user, callback) {

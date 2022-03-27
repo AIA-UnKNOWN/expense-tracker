@@ -1,5 +1,5 @@
 const checkToken = require('@middleware/auth');
-const { register, login } = require('@controllers/AuthController');
+const { register, login, getCurrentUser } = require('@controllers/AuthController');
 
 const registerRoutes = app => {
 
@@ -14,6 +14,7 @@ const registerRoutes = app => {
     });
   });
   app.post('/login', login);
+  app.get('/user', checkToken, getCurrentUser);
 
 }
 
