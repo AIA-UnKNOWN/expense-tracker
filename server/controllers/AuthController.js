@@ -8,7 +8,6 @@ class AuthController {
     this.encryptUser = this.encryptUser.bind(this);
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
   encryptUser(user) {
