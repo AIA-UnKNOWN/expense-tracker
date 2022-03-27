@@ -8,11 +8,7 @@ const registerRoutes = app => {
   });
 
   // Authentication
-  app.post('/register', (req, res) => {
-    register(req.body, ({ message, statusCode }) => {
-      res.status(statusCode).json({ message });
-    });
-  });
+  app.post('/register', register);
   app.post('/login', login);
   app.get('/user', checkToken, getCurrentUser);
 

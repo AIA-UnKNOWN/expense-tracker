@@ -24,19 +24,13 @@ class AuthController {
     });
   }
 
-  register(user, callback) {
+  register(req, res) {
+    const user = req.body;
     const encryptedUser = this.encryptUser(user);
-    connection.query('INSERT INTO Users SET ?', encryptedUser, (err, res) => {
-      if (err && err.code === 'ER_DUP_ENTRY') {
-        return callback({
-          message: 'Username already exists',
-          statusCode: 500
-        });
-      };
-      return callback({
-        message: 'Created successfully',
-        statusCode: 201
-      });
+    connection.query('INSERT INTO Users SET ?', encryptedUser, (err, result) => {
+      if (err && err.code === 'ER_DUP_ENTRY')
+        return res.status(500).json({ message: 'Username already exists' });
+      res.status(201).json({ message: 'Created successfully' });
     });
   }
 
