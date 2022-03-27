@@ -53,10 +53,6 @@ class AuthController {
     });
   }
 
-  logout() {
-
-  }
-
 }
 
 module.exports = new AuthController;
