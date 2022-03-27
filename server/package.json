@@ -1,0 +1,28 @@
+{
+  "name": "expense-tracker-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
+    "mysql": "^2.18.1"
+  },
+  "_moduleAliases": {
+    "@config": "config",
+    "@controllers": "controllers",
+    "@middleware": "middleware"
+  }
+}
