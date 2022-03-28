@@ -14,12 +14,12 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={[t.bgBlack, t.flex, t.flexCol, t.flex1, t.justifyBetween]}>
-      <View>
-        <Text style={[t.textWhite]}>
+      <View style={[t.flex, t.flexCol, t.flex1, t.justifyCenter, t.alignCenter]}>
+        <Text style={[t.textWhite, t.text4xl, t.textCenter]}>
           Expense Tracker
         </Text>
       </View>
-      <View style={[t.bgWhite, t.p4]}>
+      <View style={[t.bgWhite, t.p4, t.roundedTLg]}>
         <Text style={[t.textCenter, t.text3xl, t.fontSemibold, t.textBlack, t.mB5]}>
           Sign In
         </Text>
