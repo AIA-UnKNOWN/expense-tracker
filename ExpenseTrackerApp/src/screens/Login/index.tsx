@@ -10,7 +10,7 @@ import useLogin from './hook';
 import Input from '@common/Form/Input';
 
 const Login = ({ navigation }) => {
-  const { input, setInput, error, login } = useLogin();
+  const { input, setInput, error, login } = useLogin(navigation);
 
   return (
     <View style={[t.bgBlack, t.flex, t.flexCol, t.flex1, t.justifyBetween]}>
@@ -28,13 +28,13 @@ const Login = ({ navigation }) => {
             label="Username"
             value={input.username}
             onChangeText={(text: string) => setInput({ ...input, username: text })}
-            errorMessage={'Error'}
+            errorMessage={error.username}
           />
           <Input
             label="Password"
             value={input.password}
             onChangeText={(text: string) => setInput({ ...input, password: text })}
-            errorMessage={'Error'}
+            errorMessage={error.password}
           />
         </View>
         <TouchableOpacity

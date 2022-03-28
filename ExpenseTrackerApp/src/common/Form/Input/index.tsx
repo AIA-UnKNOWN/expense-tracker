@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
         onChangeText={onChangeText}
         value={value}
       />
-      {errorMessage && (
+      {errorMessage !== '' && (
         <Text style={[t.textRed, t.mL1]}>
           {errorMessage}
         </Text>
