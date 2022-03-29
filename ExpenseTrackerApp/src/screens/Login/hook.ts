@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import * as Keychain from 'react-native-keychain';
+import camelCaseKeys from 'camelcase-keys';
 
 const useLogin = navigation => {
   const [input, setInput] = useState({
@@ -8,6 +9,10 @@ const useLogin = navigation => {
     password: ''
   });
   const [error, setError] = useState({});
+
+  useEffect(() => {
+    checkExistingUser();
+  }, []);
 
   const clearInputs = () => {
     setInput({ username: '', password: '' });
@@ -24,14 +29,38 @@ const useLogin = navigation => {
   }
 
   const storeToken = async (token: string) => {
-    await Keychain.setGenericPassword('token', token);
-    Alert.alert('Logged In', 'Login Successfully');
+    return await Keychain.setGenericPassword('token', token);
+  }
+
+  const getCurrentUser = async (token: string) => {
+    const response = await fetch(`http://192.168.1.10:3000/user`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
+    if (!response.ok) return;
+    const user = await response.json();
+    // store the existing user...
+    navigation.navigate('Expenses');
+    console.log(camelCaseKeys(user))
+  }
+  
+  const checkExistingUser = async () => {
+    try {
+      const credentials = await Keychain.getGenericPassword();
+      const token = credentials.password;
+      if (token) getCurrentUser(token);
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   const login = async () => {
     if (!validate()) return;
     const { username, password } = input;
-    const response = await fetch('http://192.168.1.12:3000/login', {
+    const response = await fetch('http://192.168.1.10:3000/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -39,11 +68,15 @@ const useLogin = navigation => {
       },
       body: JSON.stringify({ username, password })
     });
+    clearInputs();
     const data = await response.json();
     if (data.message.toLowerCase() === 'invalid username or password')
       return Alert.alert('Login Failed', data.message);
-    storeToken(data.user.token);
-    clearInputs();
+    storeToken(data.user.token)
+      .then(() => {
+        Alert.alert('Loggoed In', 'Login Successfully');
+        navigation.navigate('Expenses');
+      });
   }
 
   return { input, setInput, error, login };
