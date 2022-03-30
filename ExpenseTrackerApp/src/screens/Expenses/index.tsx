@@ -3,11 +3,13 @@ import {
   View,
   Text
 } from 'react-native';
+import TotalBalance from '@common/TotalBalance';
 
 const Expenses = ({ navigation }) => {
   return (
     <View>
-      <Text>Expenses View</Text>
+      <TotalBalance amount={3000} />
+      
     </View>
   );
 }
