@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default {
+export default StyleSheet.create({
   totalBalanceContainer: {},
   label: {
     fontSize: 14,
@@ -21,4 +21,4 @@ export default {
     fontSize: 32,
     fontWeight: 'bold'
   }
-};
+});

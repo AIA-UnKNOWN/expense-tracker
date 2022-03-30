@@ -4,7 +4,6 @@ import {
   View,
   Text
 } from 'react-native';
-import { t } from 'react-native-tailwindcss';
 
 interface TotalBalanceProps {
   amount: number
