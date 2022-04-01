@@ -3,6 +3,7 @@ import React from 'react';
 import {
   View
 } from 'react-native';
+import useExpenseTopup from './hook';
 import Tabs from './Tabs';
 
 interface ExpenseTopupProps {
@@ -13,11 +14,13 @@ interface ExpenseTopupProps {
 const ExpenseTopup: React.FC<ExpenseTopupProps> = ({
   navigation, onAdd
 }) => {
+  const { setTab, renderTab } = useExpenseTopup();
+
   return (
     <View style={{ alignItems: 'center' }}>
       <View style={style.expenseTopupContainer}>
         <Tabs navigation={navigation} />
-        {/* render tab here either Expense/Topup */}
+        {renderTab()}
       </View>
     </View>
   );
