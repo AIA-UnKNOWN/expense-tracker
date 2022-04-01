@@ -6,18 +6,26 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const Tab = ({ navigation }) => {
+interface TabProps {
+  navigation: any,
+  onSwitchToExpense: () => void,
+  onSwitchToTopup: () => void
+}
+
+const Tab: React.FC<TabProps> = ({
+  navigation, onSwitchToExpense, onSwitchToTopup
+}) => {
   return (
     <View style={style.tabContainer}>
       <TouchableOpacity
-        onPress={() => null}
+        onPress={onSwitchToExpense}
       >
         <Text style={style.tab}>
           Expense
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => null}
+        onPress={onSwitchToTopup}
       >
         <Text style={style.tab}>
           Top Up

@@ -19,7 +19,11 @@ const ExpenseTopup: React.FC<ExpenseTopupProps> = ({
   return (
     <View style={{ alignItems: 'center' }}>
       <View style={style.expenseTopupContainer}>
-        <Tabs navigation={navigation} />
+        <Tabs
+          navigation={navigation}
+          onSwitchToExpense={() => setTab('Expense')}
+          onSwitchToTopup={() => setTab('Topup')}
+        />
         {renderTab()}
       </View>
     </View>
