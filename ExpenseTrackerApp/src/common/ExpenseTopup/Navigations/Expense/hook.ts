@@ -5,7 +5,7 @@ const useExpense = () => {
   const [amount, setAmount] = useState('0');
 
   const add = async () => {
-    
+    console.log({ label, amount: parseInt(amount) })
   }
 
   return { label, setLabel, amount, setAmount, add }

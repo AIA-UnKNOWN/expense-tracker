@@ -20,7 +20,7 @@ const Expense: React.FC = () => {
           onChangeAmount={setAmount}
         />
         <AddButton
-          onAdd={() => null}
+          onAdd={add}
         />
       </View>
     </View>
