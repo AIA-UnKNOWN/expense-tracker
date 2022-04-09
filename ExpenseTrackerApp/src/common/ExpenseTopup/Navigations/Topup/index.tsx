@@ -1,14 +1,20 @@
+import style from './style';
 import React from 'react';
 import {
-  View,
-  Text,
-  TextInput
+  View
 } from 'react-native';
+import Input from './Input';
 
 const Topup = () => {
   return (
-    <View>
-      
+    <View style={style.topupContainer}>
+      <View>
+        <Input
+          amount={"100"}
+          onChangeAmount={amount => null}
+        />
+
+      </View>
     </View>
   );
 }
