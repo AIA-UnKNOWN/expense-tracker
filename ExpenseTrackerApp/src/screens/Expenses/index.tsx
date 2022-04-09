@@ -1,17 +1,20 @@
+import style from './style';
 import React from 'react';
 import {
   View
 } from 'react-native';
 import TotalBalance from '@common/TotalBalance';
 import ExpenseTopup from '@common/ExpenseTopup';
+import Histories from './Histories';
 
 const Expenses = ({ navigation }) => {
   return (
-    <View>
+    <View style={style.expenses}>
       <TotalBalance amount={3000} />
       <ExpenseTopup
         navigation={navigation}
       />
+      <Histories />
     </View>
   );
 }
