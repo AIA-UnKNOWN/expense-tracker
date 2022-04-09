@@ -9,7 +9,8 @@ module.exports = {
         ],
         "alias": {
           "@common": "./src/common",
-          "@screens": "./src/screens"
+          "@screens": "./src/screens",
+          "@api": "./src/api.js",
         }
       }
     ],

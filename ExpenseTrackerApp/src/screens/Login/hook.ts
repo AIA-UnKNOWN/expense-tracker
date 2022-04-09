@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import * as Keychain from 'react-native-keychain';
 import camelCaseKeys from 'camelcase-keys';
+import api from '@api';
 
 const useLogin = navigation => {
   const [input, setInput] = useState({
@@ -33,7 +34,7 @@ const useLogin = navigation => {
   }
 
   const getCurrentUser = async (token: string) => {
-    const response = await fetch(`http://192.168.1.10:3000/user`, {
+    const response = await fetch(`${api}/user`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -60,7 +61,7 @@ const useLogin = navigation => {
   const login = async () => {
     if (!validate()) return;
     const { username, password } = input;
-    const response = await fetch('http://192.168.1.10:3000/login', {
+    const response = await fetch(`${api}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
