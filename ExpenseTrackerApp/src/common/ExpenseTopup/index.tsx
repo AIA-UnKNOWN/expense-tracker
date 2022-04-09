@@ -7,12 +7,11 @@ import useExpenseTopup from './hook';
 import Tabs from './Tabs';
 
 interface ExpenseTopupProps {
-  navigation: any,
-  onAdd: (amount: number) => void
+  navigation: any
 }
 
 const ExpenseTopup: React.FC<ExpenseTopupProps> = ({
-  navigation, onAdd
+  navigation
 }) => {
   const { setTab, renderTab } = useExpenseTopup();
 

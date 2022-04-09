@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   inputContainer: {
-    paddingHorizontal: 10
+    flexDirection: 'row',
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 10
   },
   inputText: {
     color: 'white',
@@ -14,5 +17,6 @@ export default StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 5,
     borderRadius: 5,
+    width: '100%'
   },
 });

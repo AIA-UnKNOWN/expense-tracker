@@ -8,7 +8,7 @@ import {
 
 interface InputProps {
   amount: string,
-  onChangeAmount: (amount: number) => void
+  onChangeAmount: () => void
 }
 
 const Input: React.FC<InputProps> = ({
@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({
       <TextInput
         style={style.textInput}
         value={amount}
-        onChangeText={amount => onChangeAmount(parseInt(amount))}
+        onChangeText={onChangeAmount}
         keyboardType="numeric"
       />
     </View>

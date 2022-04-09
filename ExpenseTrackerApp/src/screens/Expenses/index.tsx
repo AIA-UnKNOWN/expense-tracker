@@ -11,7 +11,6 @@ const Expenses = ({ navigation }) => {
       <TotalBalance amount={3000} />
       <ExpenseTopup
         navigation={navigation}
-        onAdd={amount => null}
       />
     </View>
   );
