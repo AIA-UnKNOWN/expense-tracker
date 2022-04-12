@@ -3,6 +3,7 @@ import React from 'react';
 import {
   View,
   Text,
+  ScrollView
 } from 'react-native';
 import useHistories from './hook';
 import History from './History';
@@ -15,7 +16,7 @@ const Histories: React.FC = () => {
       <Text style={style.title}>
         History
       </Text>
-      <View style={style.historiesContainer}>
+      <ScrollView style={style.historiesContainer}>
         {isLoading ? (
           <Text>Loading...</Text>
         ) : histories.length > 0 ? histories.map(history => (
@@ -31,7 +32,7 @@ const Histories: React.FC = () => {
             </Text>
           </View>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }

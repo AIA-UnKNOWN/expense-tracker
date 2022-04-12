@@ -1,26 +1,37 @@
-import { useState } from 'react';
-
-const sampleHistories = [
-  {
-    id: 1,
-    label: 'Item 1',
-    amount: -400,
-  },
-  {
-    id: 2,
-    label: 'Item 1',
-    amount: -400,
-  },
-  {
-    id: 3,
-    label: 'Item 1',
-    amount: -400,
-  },
-];
+import { useState, useEffect } from 'react';
+import * as Keychain from 'react-native-keychain';
+import api from '@api';
 
 const useHistories = () => {
+  const [historyType, setHistoryType] = useState('expenses');
   const [isLoading, setIsLoading] = useState(false);
-  const [histories, setHistories] = useState([...sampleHistories]);
+  const [histories, setHistories] = useState([]);
+
+  useEffect(() => {
+    getExpensesHistory();
+  }, []);
+
+  const getUserToken = async () => {
+    try {
+      const credentials = await Keychain.getGenericPassword();
+      const token = credentials.password;
+      if (token) return token;
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  const getExpensesHistory = async () => {
+    const token = await getUserToken();
+    const response = await fetch(`${api}/history/expenses`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    if (!response.ok) return;
+    const expensesHistory = await response.json();
+    setHistories(expensesHistory)
+  }
 
   return { isLoading, histories }
 }
