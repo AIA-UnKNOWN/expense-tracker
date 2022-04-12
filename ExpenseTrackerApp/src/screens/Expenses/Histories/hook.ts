@@ -9,7 +9,7 @@ const useHistories = () => {
 
   useEffect(() => {
     getExpensesHistory();
-  }, []);
+  }, [histories]);
 
   const getUserToken = async () => {
     try {
@@ -33,7 +33,7 @@ const useHistories = () => {
     setHistories(expensesHistory)
   }
 
-  return { isLoading, histories }
+  return { isLoading, histories, getExpensesHistory }
 }
 
 export default useHistories;
