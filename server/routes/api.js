@@ -1,7 +1,7 @@
 const checkToken = require('@middleware/auth');
 const { register, login, getCurrentUser } = require('@controllers/AuthController');
 const { spend, topup } = require('@controllers/AccountBalanceController');
-const { getExpensesHistory } = require('@controllers/HistoryController');
+const { getExpensesHistory, getTopupHistory } = require('@controllers/HistoryController');
 
 const registerApiRoutes = app => {
 
@@ -20,6 +20,7 @@ const registerApiRoutes = app => {
 
   // History
   app.get('/history/expenses', checkToken, getExpensesHistory);
+  app.get('/history/topups', checkToken, getTopupHistory);
 
 }
 

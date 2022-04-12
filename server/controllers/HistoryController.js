@@ -18,7 +18,12 @@ class HistoryController {
   }
 
   getTopupHistory(req, res) {
-    // Get all the topup history
+    getCurrentUser(req, user => {
+      connection.query('SELECT * FROM History WHERE label = "TOPUP" AND user_id = ?', user.id, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+      });
+    });
   }
 
 }
