@@ -1,6 +1,6 @@
 const checkToken = require('@middleware/auth');
 const { register, login, getCurrentUser } = require('@controllers/AuthController');
-const { spend } = require('@controllers/AccountBalanceController');
+const { spend, topup } = require('@controllers/AccountBalanceController');
 
 const registerApiRoutes = app => {
 
@@ -15,6 +15,7 @@ const registerApiRoutes = app => {
 
   // Account Balance
   app.put('/account-balance/spend', checkToken, spend);
+  app.put('/account-balance/topup', checkToken, topup);
 
 }
 
