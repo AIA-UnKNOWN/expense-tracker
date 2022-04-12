@@ -1,4 +1,5 @@
 const connection = require('@config/database');
+const { getCurrentUser } = require('@controllers/AccountBalanceController');
 
 class HistoryController {
 
@@ -8,7 +9,12 @@ class HistoryController {
   }
 
   getExpensesHistory(req, res) {
-    // Get all the expenses history
+    getCurrentUser(req, user => {
+      connection.query('SELECT * FROM History WHERE label != "TOPUP" AND user_id = ?', user.id, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+      });
+    });
   }
 
   getTopupHistory(req, res) {
@@ -17,4 +23,4 @@ class HistoryController {
 
 }
 
-export default new HistoryController;
+module.exports = new HistoryController;
