@@ -8,7 +8,7 @@ import Inputs from './Inputs';
 import AddButton from './AddButton';
 
 const Expense: React.FC = () => {
-  const { label, setLabel, amount, setAmount, add } = useExpense();
+  const { label, setLabel, amount, setAmount, add, addButtonText } = useExpense();
 
   return (
     <View style={style.expenseContainer}>
@@ -20,6 +20,7 @@ const Expense: React.FC = () => {
           onChangeAmount={setAmount}
         />
         <AddButton
+          label={addButtonText}
           onAdd={add}
         />
       </View>

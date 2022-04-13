@@ -7,6 +7,7 @@ const useExpense = () => {
   const { getExpensesHistory } = useHistories();
   const [label, setLabel] = useState('');
   const [amount, setAmount] = useState('0');
+  const [addButtonText, setAddButtonText] = useState('Add');
 
   const getUserToken = async () => {
     try {
@@ -19,6 +20,7 @@ const useExpense = () => {
   }
 
   const add = async () => {
+    setAddButtonText('Adding...');
     const token = await getUserToken();
     const response = await fetch(`${api}/account-balance/spend`, {
       method: 'PUT',
@@ -29,11 +31,12 @@ const useExpense = () => {
       },
       body: JSON.stringify({ label, amount: parseInt(amount) })
     });
+    setAddButtonText('Add');
     if (!response.ok) return;
     getExpensesHistory();
   }
 
-  return { label, setLabel, amount, setAmount, add }
+  return { label, setLabel, amount, setAmount, add, addButtonText }
 }
 
 export default useExpense;

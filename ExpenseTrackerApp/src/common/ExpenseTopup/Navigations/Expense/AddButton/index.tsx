@@ -7,11 +7,12 @@ import {
 } from 'react-native';
 
 interface AddButtonProps {
+  label: string,
   onAdd: () => void
 }
 
 const AddButton: React.FC<AddButtonProps> = ({
-  onAdd
+  label, onAdd
 }) => {
   return (
     <View style={{ alignItems: "center" }}>
@@ -20,7 +21,7 @@ const AddButton: React.FC<AddButtonProps> = ({
         onPress={onAdd}
       >
         <Text style={style.addButtonText}>
-          Add
+          {label}
         </Text>
       </TouchableOpacity>
     </View>
