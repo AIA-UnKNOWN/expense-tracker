@@ -11,6 +11,7 @@ module.exports = {
           "@common": "./src/common",
           "@screens": "./src/screens",
           "@api": "./src/api.js",
+          "@reducers": "./src/reducers",
         }
       }
     ],
