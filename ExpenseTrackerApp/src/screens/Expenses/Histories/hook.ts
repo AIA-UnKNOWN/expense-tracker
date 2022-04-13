@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as Keychain from 'react-native-keychain';
 import api from '@api';
 
 const useHistories = () => {
+  const isMounted = useRef(true);
   const abortController = new AbortController();
   const [historyType, setHistoryType] = useState('expenses');
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +13,7 @@ const useHistories = () => {
     getExpensesHistory();
     return () => {
       abortController.abort();
+      isMounted.current = false;
     }
   }, [histories]);
 
@@ -35,6 +37,7 @@ const useHistories = () => {
         signal: abortController.signal
       });
       const expensesHistory = await response.json();
+      if (!isMounted.current) return;
       setHistories(expensesHistory)
     } catch(error) {
       console.log(error);
