@@ -10,12 +10,19 @@ const useHistories = () => {
   const [histories, setHistories] = useState([]);
 
   useEffect(() => {
-    getExpensesHistory();
+    switch (historyType) {
+      case 'expenses':
+        getExpensesHistory();
+        break;
+      case 'topups':
+        getTopupsHistory();
+        break;
+    }
     return () => {
       abortController.abort();
       isMounted.current = false;
     }
-  }, [histories]);
+  }, [historyType, histories]);
 
   const getUserToken = async () => {
     try {
@@ -39,6 +46,23 @@ const useHistories = () => {
       const expensesHistory = await response.json();
       if (!isMounted.current) return;
       setHistories(expensesHistory)
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  const getTopupsHistory = async () => {
+    try {
+      const token = await getUserToken();
+      const response = await fetch(`${api}/history/topups`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        signal: abortController.signal
+      });
+      const topupsHistory = await response.json();
+      if (!isMounted.current) return;
+      setHistories(topupsHistory);
     } catch(error) {
       console.log(error);
     }
