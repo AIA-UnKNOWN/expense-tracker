@@ -3,12 +3,16 @@ import * as Keychain from 'react-native-keychain';
 import api from '@api';
 
 const useHistories = () => {
+  const abortController = new AbortController();
   const [historyType, setHistoryType] = useState('expenses');
   const [isLoading, setIsLoading] = useState(false);
   const [histories, setHistories] = useState([]);
 
   useEffect(() => {
     getExpensesHistory();
+    return () => {
+      abortController.abort();
+    }
   }, [histories]);
 
   const getUserToken = async () => {
@@ -22,15 +26,19 @@ const useHistories = () => {
   }
 
   const getExpensesHistory = async () => {
-    const token = await getUserToken();
-    const response = await fetch(`${api}/history/expenses`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    if (!response.ok) return;
-    const expensesHistory = await response.json();
-    setHistories(expensesHistory)
+    try {
+      const token = await getUserToken();
+      const response = await fetch(`${api}/history/expenses`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        signal: abortController.signal
+      });
+      const expensesHistory = await response.json();
+      setHistories(expensesHistory)
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   return { isLoading, histories, getExpensesHistory }
