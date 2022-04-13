@@ -34,18 +34,21 @@ const useLogin = navigation => {
   }
 
   const getCurrentUser = async (token: string) => {
-    const response = await fetch(`${api}/user`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    });
-    if (!response.ok) return;
-    const user = await response.json();
-    // store the existing user...
-    navigation.navigate('Expenses');
-    console.log(camelCaseKeys(user))
+    try {
+      const response = await fetch(`${api}/user`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const user = await response.json();
+      // store the existing user...
+      navigation.navigate('Expenses');
+      console.log(camelCaseKeys(user))
+    } catch (error) {
+      throw error;
+    }
   }
   
   const checkExistingUser = async () => {
