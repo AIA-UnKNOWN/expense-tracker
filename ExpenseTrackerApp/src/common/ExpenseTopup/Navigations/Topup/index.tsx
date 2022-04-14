@@ -8,7 +8,7 @@ import Input from './Input';
 import AddButton from './AddButton';
 
 const Topup = () => {
-  const { amount, setAmount, topup } = useTopup();
+  const { amount, setAmount, topup, addButtonText } = useTopup();
 
   return (
     <View style={style.topupContainer}>
@@ -18,6 +18,7 @@ const Topup = () => {
           onChangeAmount={setAmount}
         />
         <AddButton
+          label={addButtonText}
           onAdd={topup}
         />
       </View>

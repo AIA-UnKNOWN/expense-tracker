@@ -7,6 +7,7 @@ const useTopup = () => {
   const isMounted = useRef(true);
   const { getTopupsHistory } = useHistories();
   const [amount, setAmount] = useState("0");
+  const [addButtonText, setAddButtonText] = useState('Add');
 
   useEffect(() => {
     return () => {
@@ -27,6 +28,7 @@ const useTopup = () => {
   const topup = async () => {
     const token = await getUserToken();
     try {
+      setAddButtonText('Adding...');
       const response = await fetch(`${api}/account-balance/topup`, {
         method: 'PUT',
         headers: {
@@ -40,10 +42,12 @@ const useTopup = () => {
       getTopupsHistory();
     } catch(error) {
       console.log(error);
+    } finally {
+      setAddButtonText('Add');
     }
   }
 
-  return { amount, setAmount, topup }
+  return { amount, setAmount, topup, addButtonText }
 }
 
 export default useTopup;
