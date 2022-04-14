@@ -1,16 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import * as Keychain from 'react-native-keychain';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@store';
 import api from '@api';
 
 const useHistories = () => {
   const isMounted = useRef(true);
   const abortController = new AbortController();
-  const [historyType, setHistoryType] = useState('expenses');
+  const tab = useSelector((state: RootState) => state.tabs.currentTab);
   const [isLoading, setIsLoading] = useState(false);
   const [histories, setHistories] = useState([]);
 
   useEffect(() => {
-    switch (historyType) {
+    isMounted.current = true;
+    checkCurrentTab();
+    return () => {
+      abortController.abort();
+      isMounted.current = false;
+    }
+  }, [tab, histories]);
+
+  const checkCurrentTab = () => {
+    switch (tab) {
       case 'expenses':
         getExpensesHistory();
         break;
@@ -18,11 +29,7 @@ const useHistories = () => {
         getTopupsHistory();
         break;
     }
-    return () => {
-      abortController.abort();
-      isMounted.current = false;
-    }
-  }, [historyType, histories]);
+  }
 
   const getUserToken = async () => {
     try {
