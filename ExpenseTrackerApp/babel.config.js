@@ -12,6 +12,7 @@ module.exports = {
           "@screens": "./src/screens",
           "@api": "./src/api.js",
           "@reducers": "./src/reducers",
+          "@store": "./src/store",
         }
       }
     ],
