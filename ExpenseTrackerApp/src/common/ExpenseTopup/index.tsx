@@ -13,15 +13,15 @@ interface ExpenseTopupProps {
 const ExpenseTopup: React.FC<ExpenseTopupProps> = ({
   navigation
 }) => {
-  const { setTab, renderTab } = useExpenseTopup();
+  const { goToExpensesTab, goToTopupsTab, renderTab } = useExpenseTopup();
 
   return (
     <View style={{ alignItems: 'center' }}>
       <View style={style.expenseTopupContainer}>
         <Tabs
           navigation={navigation}
-          onSwitchToExpense={() => setTab('Expense')}
-          onSwitchToTopup={() => setTab('Topup')}
+          onSwitchToExpense={goToExpensesTab}
+          onSwitchToTopup={goToTopupsTab}
         />
         {renderTab()}
       </View>
