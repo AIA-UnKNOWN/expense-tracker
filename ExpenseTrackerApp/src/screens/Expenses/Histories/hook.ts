@@ -75,7 +75,7 @@ const useHistories = () => {
     }
   }
 
-  return { isLoading, histories, getExpensesHistory }
+  return { tab, isLoading, histories, getExpensesHistory }
 }
 
 export default useHistories;

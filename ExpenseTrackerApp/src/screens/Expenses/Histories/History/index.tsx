@@ -5,13 +5,14 @@ import {
   Text
 } from 'react-native';
 
-interface HistoryProps {
+export interface HistoryProps {
+  id: number,
   label: string,
-  amount: number
+  amount: string
 }
 
 const History: React.FC<HistoryProps> = ({
-  label, amount
+  id, label, amount
 }) => {
   return (
     <View style={style.history}>
