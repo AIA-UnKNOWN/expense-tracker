@@ -19,7 +19,13 @@ class AuthController {
   getCurrentUser(req, res) {
     jwt.verify(req.token, process.env.SECRET_KEY, (error, data) => {
       if (error) return res.status(401).json(error);
-      res.json(data.user);
+      connection.query('SELECT * FROM Users WHERE id = ?', data.user.id, (err, result) => {
+        if (err) throw err;
+        if (result.length === 0) return res.status(401).json({
+          message: 'Invalid username or password'
+        });
+        res.json(result[0]);
+      });
     });
   }
 
