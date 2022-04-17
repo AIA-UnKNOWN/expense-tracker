@@ -4,12 +4,11 @@ import {
   View,
   Text
 } from 'react-native';
+import useTotalBalance from './hook';
 
-interface TotalBalanceProps {
-  amount: number
-}
+const TotalBalance: React.FC = () => {
+  const { balance } = useTotalBalance();
 
-const TotalBalance: React.FC<TotalBalanceProps> = ({ amount }) => {
   return (
     <View style={style.totalBalanceContainer}>
       <Text style={style.label}>
@@ -20,7 +19,7 @@ const TotalBalance: React.FC<TotalBalanceProps> = ({ amount }) => {
           PHP
         </Text>
         <Text style={style.amount}>
-          {amount}
+          {balance}
         </Text>
       </View>
     </View>

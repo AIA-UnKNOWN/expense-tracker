@@ -10,7 +10,7 @@ import Histories from './Histories';
 const Expenses = ({ navigation }) => {
   return (
     <View style={style.expenses}>
-      <TotalBalance amount={3000} />
+      <TotalBalance />
       <ExpenseTopup
         navigation={navigation}
       />
