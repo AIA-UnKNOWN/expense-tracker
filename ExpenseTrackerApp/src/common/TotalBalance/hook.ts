@@ -7,8 +7,8 @@ const useTotalBalance = () => {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    getCurrentUser();
-  }, []);
+    getCurrentBalance();
+  }, [balance]);
 
   const getUserToken = async () => {
     try {
@@ -20,7 +20,7 @@ const useTotalBalance = () => {
     }
   }
 
-  const getCurrentUser = async () => {
+  const getCurrentBalance = async () => {
     const token = await getUserToken();
     if (!token) return setBalance(0);
     try {
@@ -38,7 +38,7 @@ const useTotalBalance = () => {
     }
   }
 
-  return { balance }
+  return { balance, getCurrentBalance }
 }
 
 export default useTotalBalance;

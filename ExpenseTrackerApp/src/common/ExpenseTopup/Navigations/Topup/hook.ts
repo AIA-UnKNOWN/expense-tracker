@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import * as Keychain from 'react-native-keychain';
 import api from '@api';
 import useHistories from '@screens/Expenses/Histories/hook';
+import useTotalBalance from '@common/TotalBalance/hook';
 
 const useTopup = () => {
   const isMounted = useRef(true);
   const { getTopupsHistory } = useHistories();
+  const { getCurrentBalance } = useTotalBalance();
   const [amount, setAmount] = useState("0");
   const [addButtonText, setAddButtonText] = useState('Add');
 
@@ -39,9 +41,10 @@ const useTopup = () => {
         body: JSON.stringify({ amount: parseInt(amount) })
       });
       if (!isMounted.current) return;
+      getCurrentBalance();
       getTopupsHistory();
     } catch(error) {
-      console.log(error);
+      throw error;
     } finally {
       setAddButtonText('Add');
     }
